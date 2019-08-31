@@ -1,5 +1,6 @@
 from os import system, remove
 from subprocess import check_output
+import re
 
 link = "https://www.youtube.com/watch?v=0_LryzvBxFw" #CS61A First Lecture
 system("youtube-dl --write-auto-sub --skip-download " + link) #Download automated subtitles
@@ -22,6 +23,15 @@ def remove_empty(raw_captions):
          removed.append(raw_captions[i].strip())
    return removed
 
+def remove_brackets(raw_captions):
+   """Remove any text inside angle brackets"""
+   for i in range(len(raw_captions)):
+      brackets = re.findall(r'<.*?\>', raw_captions[i])#Non Greedy Search for text between angle brackets
+      for bracket in brackets:
+         raw_captions[i] = raw_captions[i].replace(bracket,'')#Remove all text in brackets
+   return raw_captions
+
 raw_captions = remove_empty(raw_captions)#Get rid of new lines, spaces, and meaningless values
 raw_captions = raw_captions[3:]#Remove first 3 elements (same in every caption
+raw_captions = remove_brackets(raw_captions)#Get rid of time stamps and other useless content in brackets
 print(raw_captions)
