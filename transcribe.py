@@ -34,4 +34,9 @@ def remove_brackets(raw_captions):
 raw_captions = remove_empty(raw_captions)#Get rid of new lines, spaces, and meaningless values
 raw_captions = raw_captions[3:]#Remove first 3 elements (same in every caption
 raw_captions = remove_brackets(raw_captions)#Get rid of time stamps and other useless content in brackets
-print(raw_captions)
+
+lecture = ''
+for i in range(0, len(raw_captions), 3):
+   lecture += raw_captions[i] + ' '
+
+print(lecture) #Full Lecture (Sentences not split by periods)
