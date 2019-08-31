@@ -15,12 +15,13 @@ with open(file_name) as f:
 remove(file_name)#Delete file after reading subtitles from it
 
 def remove_empty(raw_captions):
-   "Remove empty items in raw captions"
+   """Remove useless items in raw captions"""
    removed = []
    for i in range(len(raw_captions)):
-      if raw_captions[i].strip() != '':
+      if raw_captions[i].strip() != '' and 'align:start position:0%' not in raw_captions[i]:
          removed.append(raw_captions[i].strip())
    return removed
 
-raw_captions = remove_empty(raw_captions)#Get rid of new lines, spaces, and empty values
+raw_captions = remove_empty(raw_captions)#Get rid of new lines, spaces, and meaningless values
 raw_captions = raw_captions[3:]#Remove first 3 elements (same in every caption
+print(raw_captions)
