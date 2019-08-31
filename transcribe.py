@@ -10,6 +10,17 @@ video_id = link[link.index("v=")+2:] #Get video id from link
 file_name = title + "-" + video_id + ".en.vtt" #Subtitle file name
 
 with open(file_name) as f:
-   print(f.readlines())
+   raw_captions = f.readlines()
 
-remove(file_name)
+remove(file_name)#Delete file after reading subtitles from it
+
+def remove_empty(raw_captions):
+   "Remove empty items in raw captions"
+   removed = []
+   for i in range(len(raw_captions)):
+      if raw_captions[i].strip() != '':
+         removed.append(raw_captions[i].strip())
+   return removed
+
+raw_captions = remove_empty(raw_captions)#Get rid of new lines, spaces, and empty values
+raw_captions = raw_captions[3:]#Remove first 3 elements (same in every caption
