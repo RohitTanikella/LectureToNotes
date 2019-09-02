@@ -47,3 +47,6 @@ def transcribe(link):
    lecture = check_output('curl -d "text=' + lecture + '" http://bark.phon.ioc.ee/punctuator', shell=True, stderr=DEVNULL)#Add punctuation
    lecture = lecture.decode("utf-8")#Convert from bytes back to string
    return lecture
+
+if __name__ == '__main__':
+   transcribe("https://www.youtube.com/watch?v=0_LryzvBxFw")#CS61A First Lecture
