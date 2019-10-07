@@ -46,6 +46,9 @@ def transcribe(link):
 
    lecture = check_output('curl -d "text=' + lecture + '" http://bark.phon.ioc.ee/punctuator', shell=True, stderr=DEVNULL)#Add punctuation
    lecture = lecture.decode("utf-8")#Convert from bytes back to string
+
+   with open('transcript.txt', 'w+') as f:
+      f.write(lecture)
    return lecture
 
 if __name__ == '__main__':
